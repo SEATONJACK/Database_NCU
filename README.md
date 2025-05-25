@@ -102,7 +102,7 @@
    3. [原程式碼](./README_file/題目3_3解答.sql)
         ```SQL
         WITH TeacherList AS (
-            SELECT DISTINCT ct.course_no, t.teacher_name
+            SELECT ct.course_no, t.teacher_name
             FROM CourseTeacher ct
             INNER JOIN Teacher t ON ct.teacher_id = t.teacher_id
         )
