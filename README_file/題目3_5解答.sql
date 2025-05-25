@@ -8,6 +8,6 @@ FROM CourseSelection cs
 JOIN Course c ON cs.course_no = c.course_no
 JOIN CourseTeacher ct ON c.course_no = ct.course_no
 JOIN Teacher t ON ct.teacher_id = t.teacher_id
-WHERE cs.select_result = '中選' AND cs.feedback_rank IS NOT NULL
+WHERE (cs.select_result = '中選' OR cs.slect_result = '人工加選') AND cs.feedback_rank IS NOT NULL
 GROUP BY c.course_no, c.course_name
 ORDER BY 評量平均分數 DESC;
