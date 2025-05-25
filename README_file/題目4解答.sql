@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS CourseSelection (
     student_id CHAR(8), -- 學號，主鍵+外鍵
     course_no CHAR(5), -- 課程編號，主鍵+外鍵
     semester CHAR(4), -- 學期，主鍵
-    select_result ENUM('Selected', 'Waitlist', 'Dropped') NOT NULL, -- 選課結果：已選、候補、未選
+    select_result ENUM('Selected', 'Manual', 'Dropped') NOT NULL, -- 選課結果：中選、人工加選、落選
     score DECIMAL(4,1), -- 成績
     feedback_rank TINYINT, -- 教學評量
     PRIMARY KEY (student_id, course_no, semester), -- 複合主鍵
@@ -232,7 +232,7 @@ INSERT INTO CourseSelection (student_id, course_no, semester, select_result, sco
 ('S014', 'A0003', '1132', 'Selected', 78, 5), 
 ('S015', 'A0003', '1132', 'Selected', 65, 7), 
 ('S016', 'A0003', '1132', 'Selected', 99, 5), 
-('S017', 'A0003', '1132', 'Selected', 69, 1), 
+('S017', 'A0003', '1132', 'Manual', 69, 1), 
 ('S008', 'A0004', '1132', 'Dropped', NULL, NULL), 
 ('S001', 'A0004', '1132', 'Selected', 56.5, 5), 
 ('S002', 'A0004', '1132', 'Selected', NULL, NULL), 
