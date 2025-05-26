@@ -64,18 +64,13 @@
 3. 解答
    1. [原程式碼](./README_file/題目3_1解答.sql)
         ```sql
-        -- 更新 CourseSchedule 表中的 room_code
-        UPDATE CourseSchedule
-        SET room_code = 'A201'
-        WHERE course_no = 'A0001' AND room_code = 'O313';
-
         -- 更新 Building 表，插入新的教室記錄（若 A201 不存在）
         INSERT INTO Building (building_id, building_name)
         SELECT 
             'B' + RIGHT('000' + CAST(COALESCE(MAX(CAST(SUBSTRING(building_id, 2, LEN(building_id)-1) AS INT)), 0) + 1 AS VARCHAR), 3),
-            '教研大樓'
+            N'教研大樓'
         FROM Building
-        WHERE NOT EXISTS (SELECT 1 FROM Building WHERE building_name = '教研大樓');
+        WHERE NOT EXISTS (SELECT building_id FROM Building WHERE building_name = N'教研大樓');
 
         -- 更新 Room 表，插入新的教室記錄（若 A201 不存在）
         INSERT INTO Room (room_code, building_id)
@@ -83,22 +78,12 @@
             'A201',
             building_id
         FROM Building
-        WHERE building_name = '教研大樓'
+        WHERE building_name = N'教研大樓'
         AND NOT EXISTS (SELECT 1 FROM Room WHERE room_code = 'A201')
 
-        -- 刪除無用的 Room 記錄
-        DELETE FROM Room
-        WHERE NOT EXISTS (
-        SELECT [room_code] FROM CourseSchedule 
-        WHERE CourseSchedule.room_code = Room.room_code
-        )
-
-        -- 刪除無用的 Building 記錄
-        DELETE FROM Building
-        WHERE NOT EXISTS (
-        SELECT [room_code] FROM Room 
-        WHERE Building.building_id = Room.building_id
-        );
+        UPDATE CourseSchedule
+        SET room_code = 'A201'
+        WHERE course_no = 'A0001' AND room_code = 'O313';
         ```
    2. [原程式碼](./README_file/題目3_2解答.sql)
         ```SQL
