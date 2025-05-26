@@ -49,7 +49,7 @@
         |學生系所|課程領域|人次|佔比|
         |---|---|---|---|
     5. 請列出教學評量平均分數及總分，並依平均分數由高至低排序，產出欄位範例如下：
-        |課名|授課教師|不及格人次|修課人次|不及格比例|
+        |課程編號|課稱名稱|授課教師|評量總分|評量平均分數|
         |---|---|---|---|---|
 3. 下列[網址](./README_file/course_data_1nf_2025.sql)為SQL格式及資料，請用您熟悉的資料庫實作資料庫正規化。 
 
@@ -195,7 +195,7 @@
         JOIN Course c ON cs.course_no = c.course_no
         JOIN CourseTeacher ct ON c.course_no = ct.course_no
         JOIN Teacher t ON ct.teacher_id = t.teacher_id
-        WHERE (cs.select_result = '中選' OR cs.slect_result = '人工加選') AND cs.feedback_rank IS NOT NULL
+        WHERE (cs.select_result = '中選' OR cs.select_result = '人工加選') AND cs.feedback_rank IS NOT NULL
         GROUP BY c.course_no, c.course_name
         ORDER BY 評量平均分數 DESC;
         ```
