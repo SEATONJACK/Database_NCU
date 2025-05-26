@@ -8,6 +8,7 @@ WITH TotalByDept AS (
     WHERE cs.select_result = '中選' OR cs.slect_result = '人工加選'
     GROUP BY d.dept_name
 )
+
 SELECT 
     d.dept_name AS 學生系所,
     cf.field_name AS 課程領域,
@@ -22,5 +23,5 @@ JOIN Department d ON s.dept_id = d.dept_id
 JOIN CurriculumField cf ON cs.course_no = cf.course_no
 JOIN TotalByDept t ON d.dept_name = t.dept_name
 WHERE cs.select_result = '中選' OR cs.slect_result = '人工加選'
-GROUP BY d.dept_name, cf.field_name
+GROUP BY d.dept_name, cf.field_name, t.total_count
 ORDER BY d.dept_name, 佔比 DESC;
